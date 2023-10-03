@@ -11,6 +11,36 @@ datasource db {
   directUrl         = env("DIRECT_URL")
 }
 
+model User {
+  id Int @id @default(autoincrement())
+  username String
+  avatar String @default("")
+  about_me String?
+  comments Comment[]
+  ratings Rating[]
+}
+
+model Rating {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  author User @relation(fields: [userId], references: [id])
+  userId Int
+  element Element @relation(fields: [elementId], references: [id])
+  elementId Int
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  element Element @relation(fields: [elementId], references: [id])
+  elementId Int
+}
+
 model Element {
   id Int @id @default(autoincrement())
   title String
@@ -20,5 +50,6 @@ model Element {
   images String?
   rating Int @default(0)
   adultsOnly Boolean @default(false)
-  
+  ratings Rating[]
+  comments Comment[]
 }
