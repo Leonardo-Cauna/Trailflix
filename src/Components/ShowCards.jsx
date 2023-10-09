@@ -1,8 +1,10 @@
 import TaskCard from "./TaskCard"
 
 async function LoadElements(){
-    const res = await fetch(`http://localhost:3000/api/elements?${Date.now()}`)
-    return await res.json()
+    // const res = await fetch(`http://localhost:3000/api/elements?${Date.now()}`)
+    const res = 1
+    // return await res.json()
+    return 1
   }
 export default async function ShowCards (){
     const data = await LoadElements()
