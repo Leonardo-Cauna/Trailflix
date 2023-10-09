@@ -10,11 +10,9 @@ export default function TaskCard ({ element }){
     const [downrating, setDownRating] = useState(false)
 
     async function LoadElement(){
-        // const res = await fetch(`http://localhost:3000/api/elements/${element.id}?${Date.now()}`)
-        const res = 1
+        const res = await fetch(`http://localhost:3000/api/elements/${element.id}?${Date.now()}`)
         console.log(res);
-        // return await res.json()
-        return 1
+        return await res.json()
     }
 
     async function uploadRating(id, totalRatings){
