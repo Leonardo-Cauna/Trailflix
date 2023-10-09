@@ -1,6 +1,3 @@
--- AlterTable
-ALTER TABLE "Element" ALTER COLUMN "premiere" SET DATA TYPE DATE;
-
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
@@ -32,6 +29,21 @@ CREATE TABLE "Comment" (
     "elementId" INTEGER NOT NULL,
 
     CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Element" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT,
+    "premiere" DATE,
+    "youtube_id" TEXT,
+    "images" TEXT,
+    "rating" INTEGER NOT NULL DEFAULT 0,
+    "totalRatings" INTEGER NOT NULL DEFAULT 0,
+    "adultsOnly" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "Element_pkey" PRIMARY KEY ("id")
 );
 
 -- AddForeignKey
