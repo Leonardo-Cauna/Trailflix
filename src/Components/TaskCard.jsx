@@ -3,8 +3,6 @@ import { Checkbox } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-
-export const runtime = "edge";
 export default function TaskCard ({ element }){
     const [uprating, setUpRating] = useState(false)
     const [downrating, setDownRating] = useState(false)
