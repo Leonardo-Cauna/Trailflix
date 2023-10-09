@@ -14,12 +14,15 @@ export async function POST (request){
                 youtube_id,
                 premiere,
                 images,
-                rating
+                rating,
+                totalRatings,
+                ratings,
+                comments
             }
         })
         return NextResponse.json({
-            "Response": 'Creating Elements',
-            "Request": newElement
+            "response": 'Creating Elements',
+            "request": newElement
         })
     } catch (error) {
         return NextResponse.json(error.message)
@@ -35,8 +38,8 @@ export async function GET (request, {params}){
         })
         // console.log(Elements);
         return NextResponse.json({
-            "Response": "Reading Elements",
-            "Elements": Elements
+            "response": "Reading Elements",
+            "elements": Elements
         })
     } catch (error) {
         return NextResponse.json(error.message)
@@ -45,26 +48,55 @@ export async function GET (request, {params}){
 
 export async function PUT (request, {params}){
     try {
-        const {title, description, adultsOnly, youtube_id, premiere, images, rating} = await request.json()
-        const updateElements = await prisma.element.update({
-            where: {
-                id: Number(params.id)
-            },
-            data: {
-                title,
-                description,
-                adultsOnly,
-                youtube_id,
-                premiere: new Date(premiere), //Converts given date to DATE data type
-                images,
-                rating
-            }
-        })
-        // console.log(updateTasks);
-        return NextResponse.json({
-            "Response": "Updating Elements",
-            "Elements": updateElements
-        })
+        const {title, description, adultsOnly, youtube_id, premiere, images, rating, totalRatings, ratings, comments} = await request.json()
+        if(premiere){
+            const updateElements = await prisma.element.update({
+                where: {
+                    id: Number(params.id)
+                },
+                data: {
+                    title,
+                    description,
+                    adultsOnly,
+                    youtube_id,
+                    premiere: new Date(premiere), //Converts given date to DATE data type
+                    images,
+                    rating,
+                    totalRatings,
+                    ratings,
+                    comments
+                }
+            })
+            // console.log(updateTasks);
+            return NextResponse.json({
+                "response": "Updating Elements",
+                "elements": updateElements
+            })
+        }
+        else{
+            const updateElements = await prisma.element.update({
+                where: {
+                    id: Number(params.id)
+                },
+                data: {
+                    title,
+                    description,
+                    adultsOnly,
+                    youtube_id,
+                    premiere,
+                    images,
+                    rating,
+                    totalRatings,
+                    ratings,
+                    comments
+                }
+            })
+            // console.log(updateTasks);
+            return NextResponse.json({
+                "response": "Updating Elements",
+                "elements": updateElements
+            })
+        }
     } catch (error) {
         return NextResponse.json(error.message)
     }
@@ -78,8 +110,8 @@ export async function DELETE (request, {params}){
             }
         })
         return NextResponse.json({
-            "Response": "Deleting Element",
-            "Elements": deleteElement
+            "response": "Deleting Element",
+            "elements": deleteElement
         })
         
     } catch (error) {

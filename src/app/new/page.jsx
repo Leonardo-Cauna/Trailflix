@@ -3,13 +3,14 @@
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
+
+
 export default function NewPage ({params}){
     // console.log(params);
     const router = useRouter()
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [adultsOnly, setAdults] = useState(false)
-
     useEffect(() =>{
         if(params.id){
             fetch('/api/elements/'+params.id)
@@ -17,25 +18,24 @@ export default function NewPage ({params}){
                 .catch((error) => console.log(error))
                 .then((data) =>{
                     console.log(data)
-                    if (data.Elements.state != 0) {
-                        setTitle(data.Elements.title)
-                        setDescription(data.Elements.description)
+                    if (data.elements.state != 0) {
+                        setTitle(data.elements.title)
+                        setDescription(data.elements.description)
                         setAdults(data.elements.adultsOnly)
                     }
                     else{
-                        alert(data.Elements.Response, data.Elements.Error)
+                        alert(data.elements.Response, data.elements.Error)
                     }
                 })
                 .catch((error) => console.log(error))
         }
-    });
-
+    }, []);
+    
     const onSubmit = async (e) =>{
         e.preventDefault()
 
         if(params.id){
             try {
-                // adultsOnly == "on" ? setAdults(true) : setAdults(false) 
                 console.log(adultsOnly);
                 const res = await fetch('/api/elements/'+params.id, {
                 method: "PUT",
@@ -83,26 +83,26 @@ export default function NewPage ({params}){
                 </label>
 
                 <input type="text" id="title" className="border border-gray-400 p-2 mb-4 w-full text-black"
-                onChange={(e) => setTitle(e.target.value)                                                                        }
-                value = {title}
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
                 />
                 
                 <label htmlFor="description" className="font-bold text-sm text-slate-200">
                     Task Description
                 </label>
-                <textarea id="description" rows="3" className="text-black border border-gray-400 p-2 mb-4 w-full" placeholder="Insert a description for your task" onChange={(e) => setDescription(e.target.value)}
-                value = {description}
-
+                <textarea id="description" rows="3" className="text-black border border-gray-400 p-2 mb-4 w-full" placeholder="Insert a description for your task" 
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
                 >
                 
                 </textarea>
                 <div className="flex align-middle">
                     <input type="checkbox" name="adults" id="adults" className="align-middle" onChange={(e) => { 
                     setAdults(e.target.value) 
-                    console.log(adultsOnly)
                     setAdults(!adultsOnly) 
-                    console.log(adultsOnly)
-                    }}/>
+                    }}
+                    value={adultsOnly}
+                    />
                     <label htmlFor="adults" className="font-bold text-sm text-slate-200 ml-2">
                         Adults only movie?
                     </label>
@@ -122,7 +122,7 @@ export default function NewPage ({params}){
                                     method: "DELETE"
                                 })
                                 const data = await res.json()
-                                alert(`${data.Response} N° ${data.Elements.id}`)
+                                alert(`${data.response} N° ${data.elements.id}`)
                                 console.log(data)
                                 router.refresh()
                                 router.push('/')

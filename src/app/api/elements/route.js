@@ -5,14 +5,14 @@ export async function GET (){
     const elements = await prisma.element.findMany()
     // console.log(Elements);
     return NextResponse.json({
-        "Response": "Reading Elements",
-        "Elements": elements
+        "response": "Reading Elements",
+        "elements": elements
     })
 }
 
 export async function POST (request){
     try {
-        const {title, description, adultsOnly, youtube_id, premiere, images, rating} = await request.json()
+        const {title, description, adultsOnly, youtube_id, premiere, images, rating, totalRatings, ratings, comments} = await request.json()
         if (premiere) {
             const newElement = await prisma.element.create({
                 data:
@@ -23,7 +23,10 @@ export async function POST (request){
                     youtube_id,
                     premiere: new Date(premiere),
                     images,
-                    rating
+                    rating,
+                    totalRatings,
+                    ratings,
+                    comments
                 }
             })
             return NextResponse.json({
@@ -41,7 +44,10 @@ export async function POST (request){
                     youtube_id,
                     premiere,
                     images,
-                    rating
+                    rating,
+                    totalRatings,
+                    ratings,
+                    comments
                 }
             })
             return NextResponse.json({

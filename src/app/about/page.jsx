@@ -1,6 +1,6 @@
 export default function AboutPage (){
 return(
-    <section className="flex h-screen justify-center items-center">
+    <section className="flex h-screen justify-center items-center z-0">
         <div className='container bg-slate-600 p-3 text-slate-200'>
             <h3 className='font-bold text-2xl mb-2'>About Us</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae qui quisquam harum ipsam, facilis temporibus quibusdam beatae ipsum maxime ratione quas sed et architecto facere, rem iure praesentium magnam hic dignissimos deserunt aut totam commodi doloribus eum? Quibusdam, aliquam doloribus quis odio eius similique vel, laborum ea dignissimos expedita ad blanditiis sunt sit eligendi ut rem accusantium illum possimus ducimus vero consectetur! Est dolorum omnis quisquam ad laborum mollitia amet, hic deserunt dolores dicta sint similique quod adipisci, quaerat exercitationem eaque sapiente fugit iusto assumenda explicabo tempore magni facere. Et dolore dolor impedit asperiores animi quae possimus fugiat dicta at sed ipsam quidem quaerat eos aliquid porro illum, pariatur delectus corrupti qui. Similique distinctio officia magni, animi ad placeat laboriosam.</p>

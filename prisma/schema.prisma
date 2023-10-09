@@ -49,6 +49,7 @@ model Element {
   youtube_id String?
   images String?
   rating Int @default(0)
+  totalRatings Int @default(0)
   adultsOnly Boolean @default(false)
   ratings Rating[]
   comments Comment[]
