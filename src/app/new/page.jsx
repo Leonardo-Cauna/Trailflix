@@ -101,7 +101,7 @@ export default function NewPage ({params}){
                     setAdults(e.target.value) 
                     setAdults(!adultsOnly) 
                     }}
-                    value={adultsOnly}
+                    checked={adultsOnly}
                     />
                     <label htmlFor="adults" className="font-bold text-sm text-slate-200 ml-2">
                         Adults only movie?
