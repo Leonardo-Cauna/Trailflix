@@ -3,8 +3,6 @@ import { Checkbox } from '@mui/material'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-
-export const dynamic = 'force-dynamic';
 export default function TaskCard ({ element, link }){
     const [uprating, setUpRating] = useState(false)
     const [downrating, setDownRating] = useState(false)
