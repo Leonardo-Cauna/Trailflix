@@ -1,12 +1,13 @@
 "use client"
 import { Checkbox } from '@mui/material'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function TaskCard ({ element }){
     const [uprating, setUpRating] = useState(false)
     const [downrating, setDownRating] = useState(false)
-
+    const router = useRouter()
     async function LoadElement(){
         const res = await fetch(`${process.env.LOCALHOST}/api/elements/${element.id}?${Date.now()}`)
         console.log(res);
@@ -55,7 +56,9 @@ export default function TaskCard ({ element }){
         }
     }
     return(
-        <div className='bg-slate-900 p-3 hover:bg-slate-800 hover:cursor-pointer'>
+        <div className='bg-slate-900 p-3 hover:bg-slate-800 hover:cursor-pointer' onClick={(e) => {
+            
+        }}>
         <h3 className='font-bold text-2xl mb-2 text-slate-300'>{element.title}</h3>
         <p className='text-slate-400'>{element.description}</p>
         <p className='text-slate-400'>{element.premiere == null ? "Unknown":new Date(element.premiere).toDateString()}</p>
