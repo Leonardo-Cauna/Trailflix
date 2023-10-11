@@ -4,12 +4,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-export default function TaskCard ({ element }){
+export default function TaskCard ({ element, link }){
     const [uprating, setUpRating] = useState(false)
     const [downrating, setDownRating] = useState(false)
     const router = useRouter()
+    console.log(link)
     async function LoadElement(){
-        const res = await fetch(`${process.env.LOCALHOST}/api/elements/${element.id}?${Date.now()}`)
+        const res = await fetch(`${link}/api/elements/${element.id}?${Date.now()}`)
         console.log(res);
         return await res.json()
     }
@@ -56,8 +57,10 @@ export default function TaskCard ({ element }){
         }
     }
     return(
-        <div className='bg-slate-900 p-3 hover:bg-slate-800 hover:cursor-pointer' onClick={(e) => {
-            
+        <div className='card bg-slate-900 p-3 hover:bg-slate-800 hover:cursor-pointer' onClick={(e) => {
+            if(e.currentTarget.classList.contains("card")){
+                router.push(`/edit/${element.id}`)
+            }
         }}>
         <h3 className='font-bold text-2xl mb-2 text-slate-300'>{element.title}</h3>
         <p className='text-slate-400'>{element.description}</p>
@@ -69,8 +72,8 @@ export default function TaskCard ({ element }){
                 setUpRating(e.target.value) 
                 setUpRating(!uprating) 
                 if(uprating === false){
-                    localStorage.removeItem("thumbsDown")
-                    localStorage.setItem("thumbsUp", true)
+                    localStorage.removeItem(`thumbsDown${element.title}`)
+                    localStorage.setItem(`thumbsUp${element.title}`, true)
                     if (document.getElementById(`downVote${element.id}`).checked == true) {
                         document.getElementById(`downVote${element.id}`).checked = false
                         setUpRating(true)
@@ -84,6 +87,7 @@ export default function TaskCard ({ element }){
                     upRating(1)
                 }
             }}
+            onClick={e => e.stopPropagation()}
             >
         </input>
         <input type='checkbox' value="down" id={`downVote${element.id}`} 
@@ -91,8 +95,8 @@ export default function TaskCard ({ element }){
                 setDownRating(e.target.value) 
                 setDownRating(!downrating) 
                 if(downrating === false){
-                    localStorage.removeItem("thumbsUp")
-                    localStorage.setItem("thumbsDown", true)
+                    localStorage.removeItem(`thumbsUp${element.title}`)
+                    localStorage.setItem(`thumbsDown${element.title}`, true)
                     if (document.getElementById(`upVote${element.id}`).checked == true) {
                         document.getElementById(`upVote${element.id}`).checked = false
                         setDownRating(true)
@@ -106,6 +110,7 @@ export default function TaskCard ({ element }){
                     downRating(1)
                 }
             }}
+            onClick={e => e.stopPropagation()}
             >
         </input>
     </div>
