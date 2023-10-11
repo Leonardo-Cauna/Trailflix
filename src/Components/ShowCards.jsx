@@ -1,8 +1,8 @@
 import TaskCard from "./TaskCard"
 // export const runtime = "edge";
 async function LoadElements(){
-    const res = await fetch(`${process.env.REACT_APP_LOCALHOST}/api/elements?${Date.now()}`)
-    console.log(process.env.REACT_APP_LOCALHOST)
+    const res = await fetch(`${process.env.OCALHOST}/api/elements?${Date.now()}`)
+    console.log(process.env.LOCALHOST)
     return await res.json()
   }
 export default async function ShowCards (){
@@ -11,7 +11,7 @@ export default async function ShowCards (){
     return(
         <div className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-3 mt-10'>
         {elements.map((element)=>(
-            <TaskCard element = {element} link = {process.env.REACT_APP_LOCALHOST} key = {element.id}/>
+            <TaskCard element = {element} link = {process.env.LOCALHOST} key = {element.id}/>
         ))}
         </div>
 )}
