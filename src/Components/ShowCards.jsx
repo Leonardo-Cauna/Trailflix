@@ -1,7 +1,7 @@
 import TaskCard from "./TaskCard"
 // export const runtime = "edge";
 async function LoadElements(){
-    const res = await fetch(`${process.env.OCALHOST}/api/elements?${Date.now()}`)
+    const res = await fetch(`${process.env.LOCALHOST}/api/elements?${Date.now()}`)
     console.log(process.env.LOCALHOST)
     return await res.json()
   }
