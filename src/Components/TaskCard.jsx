@@ -8,7 +8,7 @@ export default function TaskCard ({ element, link }){
     const [uprating, setUpRating] = useState(false)
     const [downrating, setDownRating] = useState(false)
     const router = useRouter()
-    console.log(link)
+    console.log(element.totalRatings);
     async function LoadElement(){
         const res = await fetch(`${link}/api/elements/${element.id}?${Date.now()}`)
         console.log(res);
